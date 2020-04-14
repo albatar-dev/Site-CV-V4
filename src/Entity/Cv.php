@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Cv
  *
  * @ORM\Table(name="cv", indexes={@ORM\Index(name="FOREIGN_CAT_CV", columns={"type_cv"})})
- * @ORM\Entity(repositoryClass="CvRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CvRepository")
  */
 class Cv
 {
@@ -79,6 +81,16 @@ class Cv
      * })
      */
     private $typeCv;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Competence", inversedBy="experiences")
+     */
+    private $competences;
+
+    public function __construct()
+    {
+        $this->competences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -177,6 +189,32 @@ class Cv
     public function setTypeCv(?CatCv $typeCv): self
     {
         $this->typeCv = $typeCv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Competence[]
+     */
+    public function getCompetences(): Collection
+    {
+        return $this->competences;
+    }
+
+    public function addCompetence(Competence $competence): self
+    {
+        if (!$this->competences->contains($competence)) {
+            $this->competences[] = $competence;
+        }
+
+        return $this;
+    }
+
+    public function removeCompetence(Competence $competence): self
+    {
+        if ($this->competences->contains($competence)) {
+            $this->competences->removeElement($competence);
+        }
 
         return $this;
     }

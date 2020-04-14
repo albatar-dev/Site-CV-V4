@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CatCv
  *
  * @ORM\Table(name="cat_cv")
- * @ORM\Entity(repositoryClass="CatCvRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CatCvRepository")
  */
 class CatCv
 {

@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Entity;
+namespace App\Repository;
 
-use App\Entity\CatCv;
+use App\Entity\Cv;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method CatCv|null find($id, $lockMode = null, $lockVersion = null)
- * @method CatCv|null findOneBy(array $criteria, array $orderBy = null)
- * @method CatCv[]    findAll()
- * @method CatCv[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Cv|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Cv|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Cv[]    findAll()
+ * @method Cv[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CatCvRepository extends ServiceEntityRepository
+class CvRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CatCv::class);
+        parent::__construct($registry, Cv::class);
     }
 
     // /**
-    //  * @return CatCv[] Returns an array of CatCv objects
+    //  * @return Cv[] Returns an array of Cv objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CatCvRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?CatCv
+    public function findOneBySomeField($value): ?Cv
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

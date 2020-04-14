@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Experiencecompetence
  *
  * @ORM\Table(name="experiencecompetence", indexes={@ORM\Index(name="FOREIGN_COMP", columns={"id_competence"}), @ORM\Index(name="FOREIGN_XP", columns={"id_experience"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ExperiencecompetenceRepository")
  */
 class Experiencecompetence
 {

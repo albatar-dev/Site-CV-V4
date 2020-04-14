@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Competence
  *
  * @ORM\Table(name="competence")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CompetenceRepository")
  */
 class Competence
 {
@@ -41,6 +43,16 @@ class Competence
      * @ORM\Column(name="cat_comp", type="string", length=255, nullable=false)
      */
     private $catComp;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cv", mappedBy="competences")
+     */
+    private $experiences;
+
+    public function __construct()
+    {
+        $this->experiences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -79,6 +91,34 @@ class Competence
     public function setCatComp(string $catComp): self
     {
         $this->catComp = $catComp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cv[]
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Cv $experience): self
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences[] = $experience;
+            $experience->addCompetence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Cv $experience): self
+    {
+        if ($this->experiences->contains($experience)) {
+            $this->experiences->removeElement($experience);
+            $experience->removeCompetence($this);
+        }
 
         return $this;
     }
