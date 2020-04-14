@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="container">
+		<section class="row">
+			{% for text in donnees %}
+				<article class="card w-100 my-3">
+					<h5 class="card-header">
+						<strong>{{ text.titre }}</strong>
+					</h5>
+					<div class="card-body">
+						<p class="card-text">{{text.texte}}</p>
+					</div>
+				</article>
+
+			{% endfor %}
+
+		</section>
+	</div>
+{% endblock %}
