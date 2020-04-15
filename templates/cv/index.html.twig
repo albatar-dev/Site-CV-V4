@@ -3,19 +3,58 @@
 {% block body %}
 
 	<div class="container">
-		<section class="row">
-			{% for categorie in categories %}
-				<article class="card w-100 my-3">
-					<h5 class="card-header">
-						<strong>{{ categorie.catCv }}</strong>
-					</h5>
-					<div class="card-body">
-						<p class="card-text">{{categorie.catCv}}</p>
+		{% for categorie in categories %}
+			<section class="d-flex flex-column align-items-center">
+				<div class="row collapser w-100" data-toggle="collapse" href="#collapse-<?= $cat->cat_cv ?>">
+					<div class="row justify-content-between">
+						<div class="row d-flex flex-row flex-nowrap justify-content-around ml-3">
+							<img class="up" src="{{ asset('build/images/arrow-down.svg') }}" alt="">
+							<h2 class="text-muted mx-3">{{categorie.ctCv}}</h2>
+							<img class="up" src="{{ asset('build/images/arrow-down.svg') }}" alt="">
+						</div>
+						<img src="{{ asset('build/images/' ~ categorie.catCvImage ~ '.svg') }}" alt="" class="col-2 icon-title d-none d-lg-block">
 					</div>
-				</article>
+				</div>
 
+				<div class="row" id="collapse-<?= $cat->cat_cv ?>">
+					{% for experience in categorie.cvs() %}
+						<article class="card bg-light p-0 col-lg-5 col-11">
+							<div class="card-header">
+								<div class="row">
+									<h5 class="col-lg-7">{{ experience.titreCv }}</h5>
+									<img class="align-self-start offset-2 col-3 d-none d-lg-block logo" src="<?= PATH ?>img\<?= $infoCat->logo_cv ?>" alt="">
+								</div>
+							</div>
+							<div class="card-body">
+								<h5 class="card-subtitle text-muted">
+									{% if (experience.dateSortie is not null) %}
+										{{ experience.dateEntree | date("m/Y")}}
+										&bull;
+										{{ experience.dateSortie | date("m/Y")}}
+									{% else %}
+										{{ experience.dateEntree | date("m/Y")}}
+									{% endif %}
+								</h5>
+								<h6 class="text-muted">{{ experience.ville }}</h6>
+								<p class="card-text">{{ experience.description }}</p>
+							</div>
+							<div class="card-footer">
+								{% for competence in experience.competences %}
+									<li class="list-group">
+										<span class="row justify-content-between mx-2">{{ competence.titreComp }}
+											<div class="progress align-self-center bg-light">
+												<div class="progress-bar progress-bar-striped progress-bar-animated bg-infos" role="progressbar" aria-valuenow="{{ competence.niveau }}" aria-valuemin="0" aria-valuemax="100" style="width: <?= intVal($comp->niveau) . '%' ?>"></div>
+											</div>
+										</span>
+									</li>
+								{% endfor %}
+							</div>
+						</article>
+					{% endfor %}
+
+
+				</section>
 			{% endfor %}
-
-		</section>
-	</div>
-{% endblock %}
+			<hr>
+		</div>
+	{% endblock %}

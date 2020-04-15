@@ -12,9 +12,9 @@ class AccueilController extends AbstractController
      * @Route("/accueil", name="accueil")
      * @Route("/")
      */
-    public function index() //TexteAccueilRepository $repo
+    public function index(TexteAccueilRepository $repo)
     {
-       // $donnees = $repo->findBy([],['position'=>'ASC']);
-        return $this->render('accueil/index.html.twig');//, compact('donnees'));
+        $donnees = $repo->findBy([],['position'=>'ASC']);
+        return $this->render('accueil/index.html.twig', compact('donnees'));
     }
 }
