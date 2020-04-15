@@ -9,3 +9,105 @@ body{
 }
 
 
+html
+{
+overflow-x: hidden
+} 
+
+main{
+    margin-top: 65px;
+    margin-bottom: 40px;
+}
+
+#titre{
+    margin-top: 50px;
+}
+
+#titre > img{
+    border-radius: 0 0 20% 20%;
+}
+
+#aside{
+    min-height: 90vh;
+    position: fixed;
+    left: 0;
+    top: 65px;
+    bottom: 0;
+}
+
+#reglagesIcon{
+    position: absolute;
+    top: 75px;
+    right: 40px;
+}
+
+article{
+    margin: 2rem;
+}
+
+.collapser > div{
+    cursor: default;
+    border-radius: 5px;
+    box-shadow: silver 2px 2px 1px 1px;
+    background: linear-gradient(rgba(192, 192, 192, 0.61),white);
+    width: 100%;
+}
+
+.up{
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition-duration: 0.7s;
+}
+
+.down{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    transition-duration: 0.7s;
+}
+
+.progress{
+    height: 7px;
+    width: 60%;
+    background-color: white;
+}
+
+.icon-title{
+    max-width: 5%;
+}
+
+.logo{
+    max-height: 40px;
+    width: auto;
+}
+
+
+#carouselProjet > div > div > img{
+    width: auto;
+    padding-bottom: 1rem;
+}
+
+#carouselProjet > div > div > div > h5{
+    color: black;
+}
+
+#carouselLaFleur{
+    border-radius: 5px;
+}
+
+.card-body > figure > img{
+    height: 120px;
+}
+
+.collapsing{
+    transition: 0.7s;
+}
+
+#position{
+    max-width: 35px;
+}

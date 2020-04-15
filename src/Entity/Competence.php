@@ -34,13 +34,15 @@ class Competence
     private $catComp;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Cv", mappedBy="competences")
+     * @ORM\OneToMany(targetEntity="App\Entity\CvCompetence", mappedBy="competence")
      */
-    private $experiences;
+    private $cvCompetence;
 
     public function __construct()
     {
         $this->experiences = new ArrayCollection();
+        $this->cvCompetences = new ArrayCollection();
+        $this->cvCompetence = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,28 +87,31 @@ class Competence
     }
 
     /**
-     * @return Collection|Cv[]
+     * @return Collection|CvCompetence[]
      */
-    public function getExperiences(): Collection
+    public function getCvCompetence(): Collection
     {
-        return $this->experiences;
+        return $this->cvCompetence;
     }
 
-    public function addExperience(Cv $experience): self
+    public function addCvCompetence(CvCompetence $cvCompetence): self
     {
-        if (!$this->experiences->contains($experience)) {
-            $this->experiences[] = $experience;
-            $experience->addCompetence($this);
+        if (!$this->cvCompetence->contains($cvCompetence)) {
+            $this->cvCompetence[] = $cvCompetence;
+            $cvCompetence->setCompetence($this);
         }
 
         return $this;
     }
 
-    public function removeExperience(Cv $experience): self
+    public function removeCvCompetence(CvCompetence $cvCompetence): self
     {
-        if ($this->experiences->contains($experience)) {
-            $this->experiences->removeElement($experience);
-            $experience->removeCompetence($this);
+        if ($this->cvCompetence->contains($cvCompetence)) {
+            $this->cvCompetence->removeElement($cvCompetence);
+            // set the owning side to null (unless already changed)
+            if ($cvCompetence->getCompetence() === $this) {
+                $cvCompetence->setCompetence(null);
+            }
         }
 
         return $this;

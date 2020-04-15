@@ -29,7 +29,7 @@ class Cv
     private $etablissement;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
 
@@ -59,13 +59,14 @@ class Cv
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Competence", inversedBy="experiences")
+     * @ORM\OneToMany(targetEntity="App\Entity\CvCompetence", mappedBy="cv")
      */
-    private $competences;
+    private $CvCompetences;
 
     public function __construct()
     {
         $this->competences = new ArrayCollection();
+        $this->CvCompetences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,7 +110,7 @@ class Cv
         return $this;
     }
 
-    public function getDateEntree(): ?string
+    public function getDateEntree(): ?\DateTimeInterface
     {
         return $this->dateEntree;
     }
@@ -170,28 +171,34 @@ class Cv
     }
 
     /**
-     * @return Collection|Competence[]
+     * @return Collection|CvCompetence[]
      */
-    public function getCompetences(): Collection
+    public function getCvCompetences(): Collection
     {
-        return $this->competences;
+        return $this->CvCompetences;
     }
 
-    public function addCompetence(Competence $competence): self
+    public function addCvCompetence(CvCompetence $cvCompetence): self
     {
-        if (!$this->competences->contains($competence)) {
-            $this->competences[] = $competence;
+        if (!$this->CvCompetences->contains($cvCompetence)) {
+            $this->CvCompetences[] = $cvCompetence;
+            $cvCompetence->setCv($this);
         }
 
         return $this;
     }
 
-    public function removeCompetence(Competence $competence): self
+    public function removeCvCompetence(CvCompetence $cvCompetence): self
     {
-        if ($this->competences->contains($competence)) {
-            $this->competences->removeElement($competence);
+        if ($this->CvCompetences->contains($cvCompetence)) {
+            $this->CvCompetences->removeElement($cvCompetence);
+            // set the owning side to null (unless already changed)
+            if ($cvCompetence->getCv() === $this) {
+                $cvCompetence->setCv(null);
+            }
         }
 
         return $this;
     }
+
 }
