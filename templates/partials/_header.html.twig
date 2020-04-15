@@ -23,6 +23,23 @@
 					<button class="btn btn-outline-primary my-2 my-sm-0 ml-2" type="submit">Login/ Signup</button>
 				</li>
 			</ul>
+
+			<ul class="navbar-nav my-2 my-lg-0 d-flex flex-row justify-content-around">
+				<li class="nav-item" id="header-pdf">
+					<a href="<?= PATH ?>downloads\CV-jocelyn-arzur.pdf" target="_blank" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/desktop-download.svg') }}" alt="pdf"></a>
+				</li>
+				<li class="nav-item" id="header-location" data-toggle="tooltip" data-placement="top" title="location">
+					<a target="_blank" href="https://www.google.fr/maps/place/29870+Lannilis/@48.4651398,-4.586488,11z/data=!4m5!3m4!1s0x4816a6c98528491b:0x40ca5cd36e569d0!8m2!3d48.5693709!4d-4.52151" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/location.svg')}}" alt="location"></a>
+				</li>
+				<li class="nav-item" id="header-tel" data-toggle="tooltip" data-placement="top" title="06.62.53.84.80">
+					<a href="tel:0662538480" class="nav-link">
+						<img class="icone-contact" src="{{ asset('build/images/device-mobile.svg') }}" alt="tel">
+					</a>
+				</li>
+				<li class="nav-item" id="header-linkedin">
+					<a href="https://www.linkedin.com/in/jocelyn-arzur-30655419a/" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/linkedin.png') }}" alt="linkedin"></a>
+				</li>
+			</ul>
 		</div>
 	</nav>
 </header>
