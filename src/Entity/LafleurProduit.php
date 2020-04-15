@@ -5,53 +5,57 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * LafleurProduit
- *
- * @ORM\Table(name="lafleur_produit")
  * @ORM\Entity(repositoryClass="App\Repository\LafleurProduitRepository")
  */
 class LafleurProduit
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pdt_ref", type="string", length=3, nullable=false, options={"default"="''","fixed"=true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $pdtRef = '\'\'';
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pdt_designation", type="string", length=50, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="string", length=3)
      */
-    private $pdtDesignation = '\'\'';
+    private $pdtRef;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pdt_prix", type="decimal", precision=5, scale=2, nullable=false, options={"default"="0.00"})
+     * @ORM\Column(type="string", length=50)
      */
-    private $pdtPrix = '0.00';
+    private $pdtDesignation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pdt_image", type="string", length=50, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="decimal", precision=6, scale=2)
      */
-    private $pdtImage = '\'\'';
+    private $pdtPrix;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pdt_categorie", type="string", length=3, nullable=false, options={"default"="''","fixed"=true})
+     * @ORM\Column(type="string", length=50)
      */
-    private $pdtCategorie = '\'\'';
+    private $pdtImage;
+
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+    private $pdtCategorie;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getPdtRef(): ?string
     {
         return $this->pdtRef;
+    }
+
+    public function setPdtRef(string $pdtRef): self
+    {
+        $this->pdtRef = $pdtRef;
+
+        return $this;
     }
 
     public function getPdtDesignation(): ?string
@@ -101,6 +105,4 @@ class LafleurProduit
 
         return $this;
     }
-
-
 }

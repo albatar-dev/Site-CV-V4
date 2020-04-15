@@ -7,40 +7,29 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Competence
- *
- * @ORM\Table(name="competence")
  * @ORM\Entity(repositoryClass="App\Repository\CompetenceRepository")
  */
 class Competence
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre_comp", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
      */
     private $titreComp;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="niveau_comp", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $niveauComp;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cat_comp", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $catComp;
 
@@ -122,6 +111,4 @@ class Competence
 
         return $this;
     }
-
-
 }

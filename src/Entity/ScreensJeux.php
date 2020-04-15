@@ -5,43 +5,30 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ScreensJeux
- *
- * @ORM\Table(name="screens_jeux", indexes={@ORM\Index(name="FOREIGN_SCREENS_JEUX", columns={"id_jeux"})})
  * @ORM\Entity(repositoryClass="App\Repository\ScreensJeuxRepository")
  */
 class ScreensJeux
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="version_jeux", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $versionJeux;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="screen_jeux", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $screenJeux;
 
     /**
-     * @var \Jeux
-     *
-     * @ORM\ManyToOne(targetEntity="Jeux")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_jeux", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Jeux", inversedBy="screensJeux")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $idJeux;
 
@@ -85,6 +72,4 @@ class ScreensJeux
 
         return $this;
     }
-
-
 }

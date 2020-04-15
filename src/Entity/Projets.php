@@ -2,45 +2,52 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Projets
- *
- * @ORM\Table(name="projets")
  * @ORM\Entity(repositoryClass="App\Repository\ProjetsRepository")
  */
 class Projets
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre_projet", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $titreProjet;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description_projet", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=500)
      */
-    private $descriptionProjet;
+    private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nature_projet", type="string", length=255, nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Jeux", mappedBy="projet")
+     */
+    private $jeux;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjetsAfpa", mappedBy="projet", orphanRemoval=true)
+     */
+    private $projetsAfpas;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private $natureProjet;
+
+    public function __construct()
+    {
+        $this->jeux = new ArrayCollection();
+        $this->projetsAfpas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,14 +66,76 @@ class Projets
         return $this;
     }
 
-    public function getDescriptionProjet(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descriptionProjet;
+        return $this->description;
     }
 
-    public function setDescriptionProjet(string $descriptionProjet): self
+    public function setDescription(string $description): self
     {
-        $this->descriptionProjet = $descriptionProjet;
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Jeux[]
+     */
+    public function getJeux(): Collection
+    {
+        return $this->jeux;
+    }
+
+    public function addJeux(Jeux $jeux): self
+    {
+        if (!$this->jeux->contains($jeux)) {
+            $this->jeux[] = $jeux;
+            $jeux->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJeux(Jeux $jeux): self
+    {
+        if ($this->jeux->contains($jeux)) {
+            $this->jeux->removeElement($jeux);
+            // set the owning side to null (unless already changed)
+            if ($jeux->getProjet() === $this) {
+                $jeux->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjetsAfpa[]
+     */
+    public function getProjetsAfpas(): Collection
+    {
+        return $this->projetsAfpas;
+    }
+
+    public function addProjetsAfpa(ProjetsAfpa $projetsAfpa): self
+    {
+        if (!$this->projetsAfpas->contains($projetsAfpa)) {
+            $this->projetsAfpas[] = $projetsAfpa;
+            $projetsAfpa->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjetsAfpa(ProjetsAfpa $projetsAfpa): self
+    {
+        if ($this->projetsAfpas->contains($projetsAfpa)) {
+            $this->projetsAfpas->removeElement($projetsAfpa);
+            // set the owning side to null (unless already changed)
+            if ($projetsAfpa->getProjet() === $this) {
+                $projetsAfpa->setProjet(null);
+            }
+        }
 
         return $this;
     }
@@ -82,6 +151,4 @@ class Projets
 
         return $this;
     }
-
-
 }

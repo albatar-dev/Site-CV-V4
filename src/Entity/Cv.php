@@ -7,80 +7,56 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cv
- *
- * @ORM\Table(name="cv", indexes={@ORM\Index(name="FOREIGN_CAT_CV", columns={"type_cv"})})
  * @ORM\Entity(repositoryClass="App\Repository\CvRepository")
  */
 class Cv
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre_cv", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $titreCv;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="etablissement_cv", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $etablissementCv;
+    private $etablissement;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description_cv", type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=50)
      */
-    private $descriptionCv;
+    private $description;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_entree_cv", type="date", nullable=false)
+     * @ORM\Column(type="date")
      */
-    private $dateEntreeCv;
+    private $dateEntree;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_sortie_cv", type="date", nullable=false)
+     * @ORM\Column(type="date")
      */
-    private $dateSortieCv;
+    private $dateSortie;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ville_cv", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $villeCv;
+    private $ville;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="logo_cv", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $logoCv;
 
     /**
-     * @var \CatCv
-     *
-     * @ORM\ManyToOne(targetEntity="CatCv")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="type_cv", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\CatCv", inversedBy="cvs")
      */
-    private $typeCv;
+    private $type;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Competence", inversedBy="experiences")
@@ -109,62 +85,62 @@ class Cv
         return $this;
     }
 
-    public function getEtablissementCv(): ?string
+    public function getEtablissement(): ?string
     {
-        return $this->etablissementCv;
+        return $this->etablissement;
     }
 
-    public function setEtablissementCv(string $etablissementCv): self
+    public function setEtablissement(string $etablissement): self
     {
-        $this->etablissementCv = $etablissementCv;
+        $this->etablissement = $etablissement;
 
         return $this;
     }
 
-    public function getDescriptionCv(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descriptionCv;
+        return $this->description;
     }
 
-    public function setDescriptionCv(string $descriptionCv): self
+    public function setDescription(string $description): self
     {
-        $this->descriptionCv = $descriptionCv;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getDateEntreeCv(): ?\DateTimeInterface
+    public function getDateEntree(): ?string
     {
-        return $this->dateEntreeCv;
+        return $this->dateEntree;
     }
 
-    public function setDateEntreeCv(\DateTimeInterface $dateEntreeCv): self
+    public function setDateEntree(string $dateEntree): self
     {
-        $this->dateEntreeCv = $dateEntreeCv;
+        $this->dateEntree = $dateEntree;
 
         return $this;
     }
 
-    public function getDateSortieCv(): ?\DateTimeInterface
+    public function getDateSortie(): ?\DateTimeInterface
     {
-        return $this->dateSortieCv;
+        return $this->dateSortie;
     }
 
-    public function setDateSortieCv(\DateTimeInterface $dateSortieCv): self
+    public function setDateSortie(\DateTimeInterface $dateSortie): self
     {
-        $this->dateSortieCv = $dateSortieCv;
+        $this->dateSortie = $dateSortie;
 
         return $this;
     }
 
-    public function getVilleCv(): ?string
+    public function getVille(): ?string
     {
-        return $this->villeCv;
+        return $this->ville;
     }
 
-    public function setVilleCv(string $villeCv): self
+    public function setVille(string $ville): self
     {
-        $this->villeCv = $villeCv;
+        $this->ville = $ville;
 
         return $this;
     }
@@ -181,14 +157,14 @@ class Cv
         return $this;
     }
 
-    public function getTypeCv(): ?CatCv
+    public function getType(): ?CatCv
     {
-        return $this->typeCv;
+        return $this->type;
     }
 
-    public function setTypeCv(?CatCv $typeCv): self
+    public function setType(?CatCv $type): self
     {
-        $this->typeCv = $typeCv;
+        $this->type = $type;
 
         return $this;
     }
@@ -218,6 +194,4 @@ class Cv
 
         return $this;
     }
-
-
 }

@@ -5,50 +5,52 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * LafleurContenir
- *
- * @ORM\Table(name="lafleur_contenir")
  * @ORM\Entity(repositoryClass="App\Repository\LafleurContenirRepository")
  */
 class LafleurContenir
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cde_moment", type="string", length=20, nullable=false, options={"default"="''"})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $cdeMoment = '\'\'';
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cde_client", type="string", length=5, nullable=false, options={"default"="''"})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=20)
      */
-    private $cdeClient = '\'\'';
+    private $cdeMoment;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="produit", type="string", length=3, nullable=false, options={"default"="''","fixed"=true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=5)
      */
-    private $produit = '\'\'';
+    private $cdeClient;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="quantite", type="integer", nullable=false)
+     * @ORM\Column(type="string", length=3)
      */
-    private $quantite = '0';
+    private $produit;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getCdeMoment(): ?string
     {
         return $this->cdeMoment;
+    }
+
+    public function setCdeMoment(string $cdeMoment): self
+    {
+        $this->cdeMoment = $cdeMoment;
+
+        return $this;
     }
 
     public function getCdeClient(): ?string
@@ -56,9 +58,23 @@ class LafleurContenir
         return $this->cdeClient;
     }
 
+    public function setCdeClient(string $cdeClient): self
+    {
+        $this->cdeClient = $cdeClient;
+
+        return $this;
+    }
+
     public function getProduit(): ?string
     {
         return $this->produit;
+    }
+
+    public function setProduit(string $produit): self
+    {
+        $this->produit = $produit;
+
+        return $this;
     }
 
     public function getQuantite(): ?int
@@ -72,6 +88,4 @@ class LafleurContenir
 
         return $this;
     }
-
-
 }

@@ -2,52 +2,55 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CatCv
- *
- * @ORM\Table(name="cat_cv")
  * @ORM\Entity(repositoryClass="App\Repository\CatCvRepository")
  */
 class CatCv
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cat_cv", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $catCv;
+    private $ctCv;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cat_cv_image", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $catCvImage;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cv", mappedBy="type")
+     */
+    private $cvs;
+
+    public function __construct()
+    {
+        $this->cvs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCatCv(): ?string
+    public function getCtCv(): ?string
     {
-        return $this->catCv;
+        return $this->ctCv;
     }
 
-    public function setCatCv(string $catCv): self
+    public function setCtCv(string $ctCv): self
     {
-        $this->catCv = $catCv;
+        $this->ctCv = $ctCv;
 
         return $this;
     }
@@ -64,5 +67,34 @@ class CatCv
         return $this;
     }
 
+    /**
+     * @return Collection|Cv[]
+     */
+    public function getCvs(): Collection
+    {
+        return $this->cvs;
+    }
 
+    public function addCv(Cv $cv): self
+    {
+        if (!$this->cvs->contains($cv)) {
+            $this->cvs[] = $cv;
+            $cv->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCv(Cv $cv): self
+    {
+        if ($this->cvs->contains($cv)) {
+            $this->cvs->removeElement($cv);
+            // set the owning side to null (unless already changed)
+            if ($cv->getType() === $this) {
+                $cv->setType(null);
+            }
+        }
+
+        return $this;
+    }
 }

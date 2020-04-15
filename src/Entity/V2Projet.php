@@ -5,60 +5,45 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * V2Projet
- *
- * @ORM\Table(name="v2_projet")
  * @ORM\Entity(repositoryClass="App\Repository\V2ProjetRepository")
  */
 class V2Projet
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_pjt", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idPjt;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_pjt", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $nomPjt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="screen_pjt", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $screenPjt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="link_pjt", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $linkPjt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="desc_pjt", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $descPjt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="categorie", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $categorie;
 
-    public function getIdPjt(): ?int
+    public function getId(): ?int
     {
-        return $this->idPjt;
+        return $this->id;
     }
 
     public function getNomPjt(): ?string
@@ -120,6 +105,4 @@ class V2Projet
 
         return $this;
     }
-
-
 }

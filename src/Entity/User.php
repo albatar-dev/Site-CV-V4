@@ -5,50 +5,34 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
- *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="FOREIGN_USR_GRAD", columns={"grade_usr"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pseudo_usr", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $pseudoUsr;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pass_usr", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $passUsr;
+    private $pssUsr;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="mail_usr", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $mailUsr;
 
     /**
-     * @var \GradeUsr
-     *
-     * @ORM\ManyToOne(targetEntity="GradeUsr")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="grade_usr", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\GradeUsr", inversedBy="users")
      */
     private $gradeUsr;
 
@@ -69,14 +53,14 @@ class User
         return $this;
     }
 
-    public function getPassUsr(): ?string
+    public function getPssUsr(): ?string
     {
-        return $this->passUsr;
+        return $this->pssUsr;
     }
 
-    public function setPassUsr(string $passUsr): self
+    public function setPssUsr(string $pssUsr): self
     {
-        $this->passUsr = $passUsr;
+        $this->pssUsr = $pssUsr;
 
         return $this;
     }
@@ -104,6 +88,4 @@ class User
 
         return $this;
     }
-
-
 }

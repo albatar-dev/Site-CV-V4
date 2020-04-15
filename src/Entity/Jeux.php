@@ -2,166 +2,149 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Jeux
- *
- * @ORM\Table(name="jeux", indexes={@ORM\Index(name="FOREIGN_JEUX_PROJETS", columns={"id_projet"})})
  * @ORM\Entity(repositoryClass="App\Repository\JeuxRepository")
  */
 class Jeux
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="version_jeux", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $versionJeux;
+    private $version;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="idee_jeux", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $ideeJeux;
+    private $idee;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="solution_jeux", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $solutionJeux;
+    private $solution;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="regles_jeux", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $reglesJeux;
+    private $regles;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="commandes_jeux", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $commandesJeux;
+    private $commandes;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="github_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $githubLink;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="projet_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $projetLink;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="bdd_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $bddLink;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cahier_charges", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $cahierCharges;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_creation", type="date", nullable=false)
+     * @ORM\Column(type="date")
      */
     private $dateCreation;
 
     /**
-     * @var \Projets
-     *
-     * @ORM\ManyToOne(targetEntity="Projets")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_projet", referencedColumnName="id")
-     * })
+     * @ORM\OneToMany(targetEntity="App\Entity\ScreensJeux", mappedBy="idJeux", orphanRemoval=true)
      */
-    private $idProjet;
+    private $screensJeux;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Projets", inversedBy="jeux")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $projet;
+
+    public function __construct()
+    {
+        $this->screensJeux = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVersionJeux(): ?string
+    public function getVersion(): ?string
     {
-        return $this->versionJeux;
+        return $this->version;
     }
 
-    public function setVersionJeux(string $versionJeux): self
+    public function setVersion(string $version): self
     {
-        $this->versionJeux = $versionJeux;
+        $this->version = $version;
 
         return $this;
     }
 
-    public function getIdeeJeux(): ?string
+    public function getIdee(): ?string
     {
-        return $this->ideeJeux;
+        return $this->idee;
     }
 
-    public function setIdeeJeux(string $ideeJeux): self
+    public function setIdee(string $idee): self
     {
-        $this->ideeJeux = $ideeJeux;
+        $this->idee = $idee;
 
         return $this;
     }
 
-    public function getSolutionJeux(): ?string
+    public function getSolution(): ?string
     {
-        return $this->solutionJeux;
+        return $this->solution;
     }
 
-    public function setSolutionJeux(string $solutionJeux): self
+    public function setSolution(string $solution): self
     {
-        $this->solutionJeux = $solutionJeux;
+        $this->solution = $solution;
 
         return $this;
     }
 
-    public function getReglesJeux(): ?string
+    public function getRegles(): ?string
     {
-        return $this->reglesJeux;
+        return $this->regles;
     }
 
-    public function setReglesJeux(string $reglesJeux): self
+    public function setRegles(string $regles): self
     {
-        $this->reglesJeux = $reglesJeux;
+        $this->regles = $regles;
 
         return $this;
     }
 
-    public function getCommandesJeux(): ?string
+    public function getCommandes(): ?string
     {
-        return $this->commandesJeux;
+        return $this->commandes;
     }
 
-    public function setCommandesJeux(string $commandesJeux): self
+    public function setCommandes(string $commandes): self
     {
-        $this->commandesJeux = $commandesJeux;
+        $this->commandes = $commandes;
 
         return $this;
     }
@@ -226,17 +209,46 @@ class Jeux
         return $this;
     }
 
-    public function getIdProjet(): ?Projets
+    /**
+     * @return Collection|ScreensJeux[]
+     */
+    public function getScreensJeux(): Collection
     {
-        return $this->idProjet;
+        return $this->screensJeux;
     }
 
-    public function setIdProjet(?Projets $idProjet): self
+    public function addScreensJeux(ScreensJeux $screensJeux): self
     {
-        $this->idProjet = $idProjet;
+        if (!$this->screensJeux->contains($screensJeux)) {
+            $this->screensJeux[] = $screensJeux;
+            $screensJeux->setIdJeux($this);
+        }
 
         return $this;
     }
 
+    public function removeScreensJeux(ScreensJeux $screensJeux): self
+    {
+        if ($this->screensJeux->contains($screensJeux)) {
+            $this->screensJeux->removeElement($screensJeux);
+            // set the owning side to null (unless already changed)
+            if ($screensJeux->getIdJeux() === $this) {
+                $screensJeux->setIdJeux(null);
+            }
+        }
 
+        return $this;
+    }
+
+    public function getProjet(): ?Projets
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projets $projet): self
+    {
+        $this->projet = $projet;
+
+        return $this;
+    }
 }

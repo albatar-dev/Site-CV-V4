@@ -5,47 +5,34 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TexteAccueil
- *
- * @ORM\Table(name="texte_accueil")
  * @ORM\Entity(repositoryClass="App\Repository\TexteAccueilRepository")
  */
 class TexteAccueil
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $titre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texte", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=500)
      */
     private $texte;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="alert_accueil", type="boolean", nullable=false)
+     * @ORM\Column(type="smallint")
      */
     private $alertAccueil;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="position", type="integer", nullable=false)
+     * @ORM\Column(type="smallint")
      */
     private $position;
 
@@ -78,12 +65,12 @@ class TexteAccueil
         return $this;
     }
 
-    public function getAlertAccueil(): ?bool
+    public function getAlertAccueil(): ?int
     {
         return $this->alertAccueil;
     }
 
-    public function setAlertAccueil(bool $alertAccueil): self
+    public function setAlertAccueil(int $alertAccueil): self
     {
         $this->alertAccueil = $alertAccueil;
 
@@ -101,6 +88,4 @@ class TexteAccueil
 
         return $this;
     }
-
-
 }

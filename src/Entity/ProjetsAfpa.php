@@ -5,144 +5,117 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ProjetsAfpa
- *
- * @ORM\Table(name="projets_afpa", indexes={@ORM\Index(name="FOREIGN_PROJETS_AFPA_PROJETS", columns={"id_projet"})})
  * @ORM\Entity(repositoryClass="App\Repository\ProjetsAfpaRepository")
  */
 class ProjetsAfpa
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="version_projet", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $versionProjet;
+    private $version;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cahier_charges_projet", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=500)
      */
-    private $cahierChargesProjet;
+    private $cahierCharges;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="solutions_projet", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=500)
      */
-    private $solutionsProjet;
+    private $solutions;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="screen_projet", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $screenProjet;
+    private $screen;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_creation", type="date", nullable=false)
+     * @ORM\Column(type="date")
      */
     private $dateCreation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="github_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $githubLink;
+    private $github;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="bdd_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $bddLink;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cahier_charges_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $cahierChargesLink;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="projet_link", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $projetLink;
 
     /**
-     * @var \Projets
-     *
-     * @ORM\ManyToOne(targetEntity="Projets")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_projet", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Projets", inversedBy="projetsAfpas")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idProjet;
+    private $projet;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVersionProjet(): ?string
+    public function getVersion(): ?string
     {
-        return $this->versionProjet;
+        return $this->version;
     }
 
-    public function setVersionProjet(string $versionProjet): self
+    public function setVersion(string $version): self
     {
-        $this->versionProjet = $versionProjet;
+        $this->version = $version;
 
         return $this;
     }
 
-    public function getCahierChargesProjet(): ?string
+    public function getCahierCharges(): ?string
     {
-        return $this->cahierChargesProjet;
+        return $this->cahierCharges;
     }
 
-    public function setCahierChargesProjet(string $cahierChargesProjet): self
+    public function setCahierCharges(string $cahierCharges): self
     {
-        $this->cahierChargesProjet = $cahierChargesProjet;
+        $this->cahierCharges = $cahierCharges;
 
         return $this;
     }
 
-    public function getSolutionsProjet(): ?string
+    public function getSolutions(): ?string
     {
-        return $this->solutionsProjet;
+        return $this->solutions;
     }
 
-    public function setSolutionsProjet(string $solutionsProjet): self
+    public function setSolutions(string $solutions): self
     {
-        $this->solutionsProjet = $solutionsProjet;
+        $this->solutions = $solutions;
 
         return $this;
     }
 
-    public function getScreenProjet(): ?string
+    public function getScreen(): ?string
     {
-        return $this->screenProjet;
+        return $this->screen;
     }
 
-    public function setScreenProjet(string $screenProjet): self
+    public function setScreen(string $screen): self
     {
-        $this->screenProjet = $screenProjet;
+        $this->screen = $screen;
 
         return $this;
     }
@@ -159,14 +132,14 @@ class ProjetsAfpa
         return $this;
     }
 
-    public function getGithubLink(): ?string
+    public function getGithub(): ?string
     {
-        return $this->githubLink;
+        return $this->github;
     }
 
-    public function setGithubLink(string $githubLink): self
+    public function setGithub(string $github): self
     {
-        $this->githubLink = $githubLink;
+        $this->github = $github;
 
         return $this;
     }
@@ -207,17 +180,15 @@ class ProjetsAfpa
         return $this;
     }
 
-    public function getIdProjet(): ?Projets
+    public function getProjet(): ?Projets
     {
-        return $this->idProjet;
+        return $this->projet;
     }
 
-    public function setIdProjet(?Projets $idProjet): self
+    public function setProjet(?Projets $projet): self
     {
-        $this->idProjet = $idProjet;
+        $this->projet = $projet;
 
         return $this;
     }
-
-
 }

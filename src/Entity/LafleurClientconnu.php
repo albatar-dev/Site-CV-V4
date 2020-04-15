@@ -5,60 +5,62 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * LafleurClientconnu
- *
- * @ORM\Table(name="lafleur_clientconnu")
  * @ORM\Entity(repositoryClass="App\Repository\LafleurClientconnuRepository")
  */
 class LafleurClientconnu
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="clt_code", type="string", length=5, nullable=false, options={"default"="''"})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $cltCode = '\'\'';
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="clt_nom", type="string", length=30, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="string", length=5)
      */
-    private $cltNom = '\'\'';
+    private $cltCode;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="clt_adresse", type="string", length=50, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="string", length=30)
      */
-    private $cltAdresse = '\'\'';
+    private $cltNom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="clt_tel", type="string", length=20, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="string", length=50)
      */
-    private $cltTel = '\'\'';
+    private $cltAdresse;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="clt_email", type="string", length=50, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="string", length=20)
      */
-    private $cltEmail = '\'\'';
+    private $cltTel;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="clt_motPasse", type="string", length=10, nullable=false, options={"default"="''"})
+     * @ORM\Column(type="string", length=50)
      */
-    private $cltMotpasse = '\'\'';
+    private $cltEmail;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $cltMotPasse;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getCltCode(): ?string
     {
         return $this->cltCode;
+    }
+
+    public function setCltCode(string $cltCode): self
+    {
+        $this->cltCode = $cltCode;
+
+        return $this;
     }
 
     public function getCltNom(): ?string
@@ -109,17 +111,15 @@ class LafleurClientconnu
         return $this;
     }
 
-    public function getCltMotpasse(): ?string
+    public function getCltMotPasse(): ?string
     {
-        return $this->cltMotpasse;
+        return $this->cltMotPasse;
     }
 
-    public function setCltMotpasse(string $cltMotpasse): self
+    public function setCltMotPasse(string $cltMotPasse): self
     {
-        $this->cltMotpasse = $cltMotpasse;
+        $this->cltMotPasse = $cltMotPasse;
 
         return $this;
     }
-
-
 }

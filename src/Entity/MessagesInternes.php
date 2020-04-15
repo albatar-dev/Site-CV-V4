@@ -5,89 +5,64 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * MessagesInternes
- *
- * @ORM\Table(name="messages_internes")
  * @ORM\Entity(repositoryClass="App\Repository\MessagesInternesRepository")
  */
 class MessagesInternes
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100)
      */
     private $nom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100)
      */
     private $prenom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="entreprise", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $entreprise;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100)
      */
     private $mail;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titreMessage", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100)
      */
-    private $titremessage;
+    private $titreMessage;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="message", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=500)
      */
     private $message;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="visibleOnSite", type="boolean", nullable=false)
+     * @ORM\Column(type="smallint", nullable=true)
      */
-    private $visibleonsite;
+    private $visibleOnSite;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="statut", type="string", length=2, nullable=false)
+     * @ORM\Column(type="string", length=2)
      */
     private $statut;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_post", type="datetime", nullable=false)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $datePost;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_confirm", type="datetime", nullable=false)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateConfirm;
 
@@ -125,7 +100,7 @@ class MessagesInternes
         return $this->entreprise;
     }
 
-    public function setEntreprise(string $entreprise): self
+    public function setEntreprise(?string $entreprise): self
     {
         $this->entreprise = $entreprise;
 
@@ -144,14 +119,14 @@ class MessagesInternes
         return $this;
     }
 
-    public function getTitremessage(): ?string
+    public function getTitreMessage(): ?string
     {
-        return $this->titremessage;
+        return $this->titreMessage;
     }
 
-    public function setTitremessage(string $titremessage): self
+    public function setTitreMessage(string $titreMessage): self
     {
-        $this->titremessage = $titremessage;
+        $this->titreMessage = $titreMessage;
 
         return $this;
     }
@@ -168,14 +143,14 @@ class MessagesInternes
         return $this;
     }
 
-    public function getVisibleonsite(): ?bool
+    public function getVisibleOnSite(): ?int
     {
-        return $this->visibleonsite;
+        return $this->visibleOnSite;
     }
 
-    public function setVisibleonsite(bool $visibleonsite): self
+    public function setVisibleOnSite(?int $visibleOnSite): self
     {
-        $this->visibleonsite = $visibleonsite;
+        $this->visibleOnSite = $visibleOnSite;
 
         return $this;
     }
@@ -192,12 +167,12 @@ class MessagesInternes
         return $this;
     }
 
-    public function getDatePost(): ?\DateTimeInterface
+    public function getDatePost(): ?\DateTimeImmutable
     {
         return $this->datePost;
     }
 
-    public function setDatePost(\DateTimeInterface $datePost): self
+    public function setDatePost(\DateTimeImmutable $datePost): self
     {
         $this->datePost = $datePost;
 
@@ -209,12 +184,10 @@ class MessagesInternes
         return $this->dateConfirm;
     }
 
-    public function setDateConfirm(\DateTimeInterface $dateConfirm): self
+    public function setDateConfirm(?\DateTimeInterface $dateConfirm): self
     {
         $this->dateConfirm = $dateConfirm;
 
         return $this;
     }
-
-
 }
