@@ -1,14 +1,14 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-	<div class="container">
+	<div class="container w-75">
 
 		{% for message in messages %}
 			<div class="card m-3">
 				<div class="card-header">
 					<div class="row">
 						<h5 class="col-lg-7">{{ message.titreMessage}}</h5>
-						<p class="text-muted">{{ message.datePost | date('y/m/d h:m') }}</p>
+						<p class="text-muted">{{ message.datePost | date('d/m/Y H:m') }}</p>
 					</div>
 				</div>
 				<div class="card-body">
