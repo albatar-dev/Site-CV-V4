@@ -17,13 +17,18 @@
 		{% include 'partials/_header.html.twig' %}
 
 
-		<main class="container"> {% block body %}{% endblock %}
+		<main class="container">
 
-			</main>
+			<div class="container">
+				{% include "partials/_flash.html.twig" %}
+			</div>
 
-			{% block javascripts %}
-				{{ encore_entry_script_tags('app') }}
-			{% endblock %}
+			{% block body %}{% endblock %}
+		</main>
 
-		</body>
-	</html>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
+	</body>
+</html>

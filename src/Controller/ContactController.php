@@ -6,10 +6,10 @@ use App\Form\ContactFormType;
 use App\Entity\MessagesInternes;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\MessagesInternesRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ContactController extends AbstractController
 {
@@ -30,10 +30,18 @@ class ContactController extends AbstractController
             $this->addFlash('success', 'Votre message a bien été envoyé.');
 
             return $this->redirectToRoute('contact');
-        } else {
-            $this->addFlash('danger', 'Errerur lors de l\'envoi de votre message !');
         }
 
         return $this->render('contact/index.html.twig', ['form'=>$form->createView()]);
     }
+
+    /**
+     * @Route("/messages", name="messages.show")
+     */
+
+     function show(MessagesInternesRepository $repo){
+        $messages = $repo->findBy(['visibleOnSite'=>true, 'statut'=>'C'], ['datePost'=>'ASC']);
+
+        return $this->render('contact/show.html.twig', compact('messages'));
+     }
 }

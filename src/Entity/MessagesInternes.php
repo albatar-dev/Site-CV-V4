@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MessagesInternesRepository")
@@ -19,11 +20,12 @@ class MessagesInternes
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Le nom est obligatoire !")
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $prenom;
 
@@ -34,16 +36,21 @@ class MessagesInternes
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Veuillez préciser votre email.")
+     * @Assert\Email(message="Veuillez entrer une adresse email valide.")
      */
     private $mail;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotBlank(message="Veuillez entrer un titre à votre message.")
      */
     private $titreMessage;
 
     /**
      * @ORM\Column(type="string", length=500)
+     * @Assert\NotBlank(message="Veuillez entrer un message.")
+     * @Assert\Length(min=20, minMessage="Votre message doit comporter au moins {{ limit }} caractères.")
      */
     private $message;
 
@@ -62,14 +69,18 @@ class MessagesInternes
      */
     private $datePost;
 
-    function __construct(){
-        $this->datePost = new DateTime();
-    }
-
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateConfirm;
+
+
+    //initialisation des valeurs par défaut.
+    function __construct(){
+        $this->datePost = new DateTime();
+        $this->statut = 'AC';
+        $this->dateConfirm = null;
+    }
 
     public function getId(): ?int
     {
