@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,7 +48,7 @@ class MessagesInternes
     private $message;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $visibleOnSite;
 
@@ -57,9 +58,13 @@ class MessagesInternes
     private $statut;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $datePost;
+
+    function __construct(){
+        $this->datePost = new DateTime();
+    }
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -167,12 +172,12 @@ class MessagesInternes
         return $this;
     }
 
-    public function getDatePost(): ?\DateTimeImmutable
+    public function getDatePost(): ?\DateTimeInterface
     {
         return $this->datePost;
     }
 
-    public function setDatePost(\DateTimeImmutable $datePost): self
+    public function setDatePost(\DateTimeInterface $datePost): self
     {
         $this->datePost = $datePost;
 
