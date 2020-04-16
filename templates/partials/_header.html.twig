@@ -1,51 +1,59 @@
-<header
-	class"container">
-	<!-- required bootstrap js -->
+<header class"container">
+
+
 	<nav class="navbar navbar-expand-md navbar-light fixed-top bg-secondary">
-		<canvas id="canvas" width="40" height="40"></canvas>
+		<canvas id="canvas" width="40" height="40" class="mr-3"></canvas>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarCollapse">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="{{ path('accueil') }}">Accueil</a>
-				</li>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="#">Projets</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('cv') }}">CV</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('contact') }}">Contact</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('messages.show') }}">Messages</a>
-				</li>
-				<li class="nav-item">
-					<button class="btn btn-outline-primary my-2 my-sm-0 ml-2" type="submit">Login/ Signup</button>
-				</li>
-			</ul>
+		<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+			<div class="row">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('accueil') }}">Accueil</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Projets
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% for projet in projets %}
+								<a class="dropdown-item" href="{{ path('projets', {'id':projet.id }) }}">{{ projet.titreProjet }}</a>
+							{% endfor %}
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('cv') }}">CV</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('contact') }}">Contact</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('messages.show') }}">Messages</a>
+					</li>
+				</ul>
+			</div>
 
-			<ul class="navbar-nav my-2 my-lg-0 d-flex flex-row justify-content-around">
-				<li class="nav-item" id="header-pdf">
-					<a href="<?= PATH ?>downloads\CV-jocelyn-arzur.pdf" target="_blank" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/desktop-download.svg') }}" alt="pdf"></a>
-				</li>
-				<li class="nav-item" id="header-location" data-toggle="tooltip" data-placement="top" title="location">
-					<a target="_blank" href="https://www.google.fr/maps/place/29870+Lannilis/@48.4651398,-4.586488,11z/data=!4m5!3m4!1s0x4816a6c98528491b:0x40ca5cd36e569d0!8m2!3d48.5693709!4d-4.52151" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/location.svg')}}" alt="location"></a>
-				</li>
-				<li class="nav-item" id="header-tel" data-toggle="tooltip" data-placement="top" title="06.62.53.84.80">
-					<a href="tel:0662538480" class="nav-link">
-						<img class="icone-contact" src="{{ asset('build/images/device-mobile.svg') }}" alt="tel">
-					</a>
-				</li>
-				<li class="nav-item" id="header-linkedin">
-					<a href="https://www.linkedin.com/in/jocelyn-arzur-30655419a/" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/linkedin.png') }}" alt="linkedin"></a>
-				</li>
-			</ul>
+			<div>
+				<ul class="navbar-nav my-2 my-lg-0 d-flex flex-row justify-content-around">
+					<li class="nav-item" id="header-pdf">
+						<a href="<?= PATH ?>downloads\CV-jocelyn-arzur.pdf" target="_blank" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/desktop-download.svg') }}" alt="pdf"></a>
+					</li>
+					<li class="nav-item" id="header-location" data-toggle="tooltip" data-placement="top" title="location">
+						<a target="_blank" href="https://www.google.fr/maps/place/29870+Lannilis/@48.4651398,-4.586488,11z/data=!4m5!3m4!1s0x4816a6c98528491b:0x40ca5cd36e569d0!8m2!3d48.5693709!4d-4.52151" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/location.svg')}}" alt="location"></a>
+					</li>
+					<li class="nav-item" id="header-tel" data-toggle="tooltip" data-placement="top" title="06.62.53.84.80">
+						<a href="tel:0662538480" class="nav-link">
+							<img class="icone-contact" src="{{ asset('build/images/device-mobile.svg') }}" alt="tel">
+						</a>
+					</li>
+					<li class="nav-item" id="header-linkedin">
+						<a href="https://www.linkedin.com/in/jocelyn-arzur-30655419a/" class="nav-link"><img class="icone-contact" src="{{ asset('build/images/linkedin.png') }}" alt="linkedin"></a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 </header>

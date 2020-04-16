@@ -14,7 +14,7 @@
 
 	<body class="bg-light">
 
-		{% include 'partials/_header.html.twig' %}
+		{{ render(controller("App\\Controller\\HeaderController::projets")) }}
 
 
 		<main class="container">
