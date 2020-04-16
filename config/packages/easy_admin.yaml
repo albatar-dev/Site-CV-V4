@@ -1,6 +1,12 @@
-#easy_admin:
-#    entities:
-#        # List the entity class name you want to manage
-#        - App\Entity\Product
-#        - App\Entity\Category
-#        - App\Entity\User
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        - App\Entity\Projets
+        - App\Entity\Cv
+        - App\Entity\TexteAccueil
+        - App\Entity\User
+        - App\Entity\MessagesInternes
+    user:
+        # options d'identification
+        display_name: true
+        display_avatar: true

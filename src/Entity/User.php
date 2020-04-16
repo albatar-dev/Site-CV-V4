@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -41,24 +42,24 @@ class User
         return $this->id;
     }
 
-    public function getPseudoUsr(): ?string
+    public function getUsername(): ?string
     {
         return $this->pseudoUsr;
     }
 
-    public function setPseudoUsr(string $pseudoUsr): self
+    public function setUsername(string $pseudoUsr): self
     {
         $this->pseudoUsr = $pseudoUsr;
 
         return $this;
     }
 
-    public function getPssUsr(): ?string
+    public function getPassword(): ?string
     {
         return $this->pssUsr;
     }
 
-    public function setPssUsr(string $pssUsr): self
+    public function setPassword(string $pssUsr): self
     {
         $this->pssUsr = $pssUsr;
 
@@ -77,15 +78,25 @@ class User
         return $this;
     }
 
-    public function getGradeUsr(): ?GradeUsr
+    public function getRoles(): ?array
     {
-        return $this->gradeUsr;
+        return array(0 => $this->gradeUsr->getGrade());
     }
 
-    public function setGradeUsr(?GradeUsr $gradeUsr): self
+    public function setRoles(?GradeUsr $gradeUsr): self
     {
         $this->gradeUsr = $gradeUsr;
 
         return $this;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        return false;
     }
 }
