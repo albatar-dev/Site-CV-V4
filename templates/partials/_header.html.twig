@@ -56,4 +56,38 @@
 			</div>
 		</div>
 	</nav>
+
+
+	<div class="row align-items-center" id="reglagesIcon">
+		<img src="{{asset('build/images/gear.svg') }}" alt="" data-toggle="tooltip" data-placement="top" title="Réglages">
+	</div>
+
+	<!---  Toast Reglages  -->
+	<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center">
+		<div style="position: absolute; top: 75px; right: 60px; margin: 0 auto; z-index:2; opacity:0.85;">
+			<div class="toast bg-light" data-autohide="false" role="status" aria-live="assertive" aria-atomic="true">
+				<div class="toast-header">
+					<img src="{{ asset('build/images/gear.svg') }}" class="rounded mr-2" alt="...">
+					<strong class="mr-auto h5">Réglages</strong>
+					<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="toast-body">
+					{% if (user != null) %}
+						<p>Bonjour
+							<strong>
+								{{ user.userName }}
+							</strong>.</p>
+						<br>
+						<p>Bientôt de nouvelles options ici...</p>
+						<a href="{{ path('app_logout') }}" class="btn btn-outline-secondary">Déconnexion</a>
+					{% else %}
+						<a href="{{ path('app_login') }}" class="btn btn-outline-secondary">Connexion</a>
+
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 </header>

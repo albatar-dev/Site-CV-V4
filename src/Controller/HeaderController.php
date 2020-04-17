@@ -12,6 +12,7 @@ class HeaderController extends AbstractController
     public function projets(ProjetsRepository $repo)
     {
         $projets = $repo->findAll();
-        return $this->render('partials/_header.html.twig', compact('projets'));
+        $user = $this->getUser();
+        return $this->render('partials/_header.html.twig', compact('projets', 'user'));
     }
 }
