@@ -191,4 +191,9 @@ class ProjetsAfpa
 
         return $this;
     }
+    
+    
+    public function __toString(){
+        return ($this->projet->getTitreProjet() ." ". $this->version);
+    }
 }

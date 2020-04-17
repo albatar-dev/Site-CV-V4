@@ -1,11 +1,13 @@
 easy_admin:
     entities:
         # List the entity class name you want to manage
-        - App\Entity\Projets
-        - App\Entity\Cv
         - App\Entity\TexteAccueil
-        - App\Entity\User
+        - App\Entity\Cv
+        - App\Entity\Projets
+        - App\Entity\Jeux
+        - App\Entity\ProjetsAfpa
         - App\Entity\MessagesInternes
+        - App\Entity\User
     user:
         # options d'identification
         display_name: true

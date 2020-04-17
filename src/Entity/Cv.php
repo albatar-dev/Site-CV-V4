@@ -63,6 +63,11 @@ class Cv
      */
     private $CvCompetences;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $certifUdemy;
+
     public function __construct()
     {
         $this->competences = new ArrayCollection();
@@ -197,6 +202,18 @@ class Cv
                 $cvCompetence->setCv(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCertifUdemy(): ?string
+    {
+        return $this->certifUdemy;
+    }
+
+    public function setCertifUdemy(?string $certifUdemy): self
+    {
+        $this->certifUdemy = $certifUdemy;
 
         return $this;
     }

@@ -99,4 +99,8 @@ class User implements UserInterface
     {
         return false;
     }
+
+    public function __toString(){
+        return $this->pseudoUsr;
+    }
 }
