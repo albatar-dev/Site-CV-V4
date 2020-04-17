@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{{form_start(form)}}
+	{{form_widget(form)}}
+	<p>
+		<input type="submit" class="btn btn-primary" value="Envoyer" formnovalidate>
+		<a href="{{ path('accueil') }}">Cancel</a>
+	</p>
+	<p>
+		{{form_end(form)}}
+	</p>
+{% endblock %}

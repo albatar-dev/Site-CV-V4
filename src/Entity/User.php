@@ -103,4 +103,40 @@ class User implements UserInterface
     public function __toString(){
         return $this->pseudoUsr;
     }
+
+    public function getPseudoUsr(): ?string
+    {
+        return $this->pseudoUsr;
+    }
+
+    public function setPseudoUsr(string $pseudoUsr): self
+    {
+        $this->pseudoUsr = $pseudoUsr;
+
+        return $this;
+    }
+
+    public function getPssUsr(): ?string
+    {
+        return $this->pssUsr;
+    }
+
+    public function setPssUsr(string $pssUsr): self
+    {
+        $this->pssUsr = $pssUsr;
+
+        return $this;
+    }
+
+    public function getGradeUsr(): ?GradeUsr
+    {
+        return $this->gradeUsr;
+    }
+
+    public function setGradeUsr(?GradeUsr $gradeUsr): self
+    {
+        $this->gradeUsr = $gradeUsr;
+
+        return $this;
+    }
 }

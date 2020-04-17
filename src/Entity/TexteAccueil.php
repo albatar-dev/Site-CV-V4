@@ -27,7 +27,7 @@ class TexteAccueil
     private $texte;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="boolean")
      */
     private $alertAccueil;
 
@@ -65,7 +65,7 @@ class TexteAccueil
         return $this;
     }
 
-    public function getAlertAccueil(): ?int
+    public function getAlertAccueil(): ?bool
     {
         return $this->alertAccueil;
     }

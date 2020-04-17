@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title "Jocelyn ARZUR | Admin" %}
+
+
+{% block body %}
+	{% block aside %}
+		{{ render(controller("App\\Controller\\AdminController::aside")) }}
+	{% endblock %}
+
+	{% block main %}{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,60 @@
+<aside class="navbar navbar-expand-lg flex-column navbar-light bg-secondary col-2 shadow" id="aside">
+
+	<a href="<?= PATH_ADMIN ?>" class="navbar-brand">Administration</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarAdmin" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse align-items-start w-100" id="navBarAdmin">
+		<ul class="navbar-nav flex-column ml-3">
+			<li class="nav-item">
+				<a href="<?= PATH_ADMIN ?>accueil/aff" class="nav-link text-light">
+					Accueil
+				</a>
+			</li>
+
+			<li class="nav-item active">
+				<a data-toggle="collapse" class="nav-link collapser text-light" href="#projets">
+					Projets
+				</a>
+			</li>
+
+			<!-- Affichage dynamique des projets -->
+			<li class="row collapse flex-column" id="projets">
+				{% for projet in projets %}
+					<a href="{{ path('projets', {'id': projet.id }) }}" class="list-group-item bg-secondary ml-3 text-light">{{ projet.titreProjet }}</a>
+				{% endfor %}
+			</li>
+
+			<li class="nav-item active">
+				<a data-toggle="collapse" class="nav-link collapser text-light" href="#cv">
+					CV
+				</a>
+			</li>
+			<li class="row collapse flex-column" id="cv">
+				<a href="#" class="list-group-item bg-secondary ml-3 text-light">Experiences</a>
+				<a href="#" class="list-group-item bg-secondary ml-3 text-light">Formations</a>
+				<a href="#" class="list-group-item bg-secondary ml-3 text-light">Compétences</a>
+			</li>
+			<li class="nav-item">
+				<a href="" class="nav-link text-light">
+					Contact
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a href="<?= PATH_ADMIN ?>messages/aff" class="nav-link text-light">
+					Messages
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a href="<?= PATH_ADMIN ?>users/aff" class="nav-link text-light">
+					Utilisateurs
+				</a>
+			</li>
+
+
+		</ul>
+	</div>
+</aside>

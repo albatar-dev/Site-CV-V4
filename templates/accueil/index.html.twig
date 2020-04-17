@@ -3,10 +3,6 @@
 {% block title "Jocelyn ARZUR | Accueil" %}
 
 {% block body %}
-	<h1>Bonjour
-		{{ user.userName }}
-		!!
-	</h1>
 	<div class="container">
 		<section class="row">
 			{% for text in donnees %}
@@ -17,6 +13,11 @@
 					<div class="card-body">
 						<p class="card-text">{{text.texte}}</p>
 					</div>
+					{% if user != null and user.roles[0] == "ROLE_ADMIN" %}
+						<div class="card-footer">
+							<a href="{{ path('accueil.edit', {'id': text.id }) }}" class="btn btn-outline-warning">Edit</a>
+						</div>
+					{% endif %}
 				</article>
 
 			{% endfor %}
